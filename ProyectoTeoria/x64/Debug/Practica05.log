@@ -1,0 +1,26 @@
+﻿  Window.cpp
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+  (compilando archivo de origen "Window.cpp")
+  
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+  (compilando archivo de origen "Window.cpp")
+  
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(171,22): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(172,22): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(176,28): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(177,40): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(179,21): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(180,21): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  practica5.cpp
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+  (compilando archivo de origen "practica5.cpp")
+  
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+  (compilando archivo de origen "practica5.cpp")
+  
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\practica5.cpp(165,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\practica5.cpp(167,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  Generando código...
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\Practica05\Window.cpp(107,1): warning C4715: 'Window::Initialise': no todas las rutas de acceso de control devuelven un valor
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Practica05.vcxproj -> C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\Practica05\x64\Debug\Practica05.exe
