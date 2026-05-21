@@ -6,7 +6,6 @@ C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\
 C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
   (compilando archivo de origen "practica9_2.cpp")
   
-C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\practica9_2.cpp(146,24): warning C4267: 'inicializando': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
-C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\practica9_2.cpp(537,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\practica9_2.cpp(539,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\practica9_2.cpp(239,24): warning C4267: 'inicializando': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\ProyectoTeoria\practica9_2.cpp(1212,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   ProyectoTeoria.vcxproj -> C:\Users\kiryu\OneDrive\Desktop\Computacion\CGIHM\ProyectoTeoria\x64\Debug\ProyectoTeoria.exe

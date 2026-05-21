@@ -7,10 +7,11 @@ public:
 	Texture(const char* FileLoc);
 	bool LoadTexture();
 	bool LoadTextureA();
+	bool LoadTextureFromMemory(const unsigned char* data, int dataLen);
 	void UseTexture();
 	void ClearTexture();
 	~Texture();
-private: 
+private:
 	GLuint textureID;
 	int width, height, bitDepth;
 	const char *fileLocation;

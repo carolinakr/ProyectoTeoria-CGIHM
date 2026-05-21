@@ -32,6 +32,9 @@ public:
 	GLuint GetEyePositionLocation();
 	GLuint getColorLocation();
 	GLuint getOffsetLocation();
+	GLuint getAlphaLocation();
+	GLuint getNoLightingLocation();
+	GLuint GetUniformLocation(const char* name);
 
 	void SetDirectionalLight(DirectionalLight * dLight);
 	void SetPointLights(PointLight * pLight, unsigned int lightCount);
@@ -45,8 +48,8 @@ public:
 private:
 	int pointLightCount;
 	int spotLightCount;
-	GLuint shaderID, uniformProjection, uniformModel, uniformColor, uniformView, uniformEyePosition,
-		uniformSpecularIntensity, uniformShininess, uniformTextureOffset;
+	GLuint shaderID, uniformProjection, uniformModel, uniformColor, uniformAlpha, uniformNoLighting,
+		uniformView, uniformEyePosition, uniformSpecularIntensity, uniformShininess, uniformTextureOffset;
 
 	struct {
 		GLuint uniformcolor;
@@ -89,4 +92,3 @@ private:
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
 	void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
 };
-

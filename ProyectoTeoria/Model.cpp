@@ -1,5 +1,6 @@
 #include "Model.h"
 #include <unordered_map>
+#include <vector>
 #include <gtc\type_ptr.hpp>
 
 
@@ -143,54 +144,100 @@ void Model::LoadMaterials(const aiScene * scene)
 			aiString path;
 			if (material->GetTexture(texType, 0, &path) == AI_SUCCESS)
 			{
-				std::string fullpath = std::string(path.data);
-				std::string filename;
+				std::string pathStr = std::string(path.data);
 
-				// Normalizar separadores y extraer solo el nombre del archivo
-				std::replace(fullpath.begin(), fullpath.end(), '\\', '/');
-				size_t sepIdx = fullpath.rfind('/');
-				if (sepIdx != std::string::npos)
-					filename = fullpath.substr(sepIdx + 1);
-				else
-					filename = fullpath;
-
-				// Si no tiene extension, agregar .png
-				if (filename.find('.') == std::string::npos)
-					filename += ".png";
-
-				// Buscar en carpeta del modelo y luego en Textures/
-				std::vector<std::string> candidatos = {
-					modelDir + fullpath,
-					modelDir + filename,
-					std::string("Textures/") + filename
-				};
-
-				auto it = loadedTextures.find(filename);
-				if (it != loadedTextures.end())
+				// ── Textura embebida: Assimp usa "*N" como nombre ─────────
+				if (pathStr.size() > 0 && pathStr[0] == '*')
 				{
-					TextureList[i] = it->second;
-				}
-				else
-				{
-					std::string ext = filename.substr(filename.find_last_of('.') + 1);
-					bool loaded = false;
-					for (auto& ruta : candidatos)
+					int embIdx = std::atoi(pathStr.c_str() + 1);
+					std::string embKey = "__embedded__" + std::to_string(embIdx);
+					auto it = loadedTextures.find(embKey);
+					if (it != loadedTextures.end())
 					{
-						Texture* newTex = new Texture(ruta.c_str());
-						if (ext == "tga" || ext == "png")
-							loaded = newTex->LoadTextureA();
+						TextureList[i] = it->second;
+					}
+					else if (scene->mNumTextures > (unsigned int)embIdx)
+					{
+						aiTexture* aitex = scene->mTextures[embIdx];
+						Texture* newTex = new Texture("(embedded)");
+						bool loaded = false;
+						if (aitex->mHeight == 0)
+						{
+							// Formato comprimido (PNG/JPG): mWidth = tamanio en bytes
+							loaded = newTex->LoadTextureFromMemory(
+								reinterpret_cast<const unsigned char*>(aitex->pcData),
+								(int)aitex->mWidth);
+						}
 						else
-							loaded = newTex->LoadTexture();
+						{
+							// ARGB8888 sin comprimir: convertir a RGBA
+							int npix = (int)(aitex->mWidth * aitex->mHeight);
+							std::vector<unsigned char> rgba(npix * 4);
+							for (int p = 0; p < npix; p++)
+							{
+								rgba[p*4+0] = aitex->pcData[p].r;
+								rgba[p*4+1] = aitex->pcData[p].g;
+								rgba[p*4+2] = aitex->pcData[p].b;
+								rgba[p*4+3] = aitex->pcData[p].a;
+							}
+							loaded = newTex->LoadTextureFromMemory(rgba.data(), (int)rgba.size());
+						}
 						if (loaded)
 						{
 							TextureList[i] = newTex;
-							loadedTextures[filename] = newTex;
-							break;
+							loadedTextures[embKey] = newTex;
 						}
-						delete newTex;
+						else
+						{
+							printf("No se pudo cargar textura embebida %d\n", embIdx);
+							delete newTex;
+						}
 					}
-					if (!loaded)
-						printf("No se encontro la Textura: %s\n", filename.c_str());
+				}
+				else
+				{
+					// ── Textura en archivo ────────────────────────────────
+					std::string fullpath = pathStr;
+					std::string filename;
+					std::replace(fullpath.begin(), fullpath.end(), '\\', '/');
+					size_t sepIdx = fullpath.rfind('/');
+					filename = (sepIdx != std::string::npos) ? fullpath.substr(sepIdx + 1) : fullpath;
+					if (filename.find('.') == std::string::npos)
+						filename += ".png";
+
+					std::vector<std::string> candidatos = {
+						modelDir + fullpath,
+						modelDir + filename,
+						std::string("Textures/") + filename
+					};
+
+					auto it = loadedTextures.find(filename);
+					if (it != loadedTextures.end())
+					{
+						TextureList[i] = it->second;
+					}
+					else
+					{
+						std::string ext = filename.substr(filename.find_last_of('.') + 1);
+						bool loaded = false;
+						for (auto& ruta : candidatos)
+						{
+							Texture* newTex = new Texture(ruta.c_str());
+							if (ext == "tga" || ext == "png")
+								loaded = newTex->LoadTextureA();
+							else
+								loaded = newTex->LoadTexture();
+							if (loaded)
+							{
+								TextureList[i] = newTex;
+								loadedTextures[filename] = newTex;
+								break;
+							}
+							delete newTex;
+						}
+						if (!loaded)
+							printf("No se encontro la Textura: %s\n", filename.c_str());
+					}
 				}
 			}
 		}
